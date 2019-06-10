@@ -4,6 +4,7 @@ import datetime as dt
 import matplotlib.pyplot as plt
 from cartopy import feature
 import cartopy.crs as ccrs
+import cartopy.vector_transform as cvt
 from cartopy.feature import NaturalEarthFeature
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 import matplotlib.ticker as mticker
@@ -86,6 +87,10 @@ def getdata(url):
         data['u']=nc_data['u'][:,0,:]
         data['v']=nc_data['v'][:,0,:]
         data['magnitude'] = (data['u'] ** 2 + data['v'] ** 2) ** 0.5
+        print('lonc:', data['lonc'].shape)
+        print('latc:',data['latc'].shape)
+        print('u,v:',data['u'].shape, data['v'].shape)
+        print('magn:',data['magnitude'].shape)
         #time
         times=[]
         for i in nc_data['Times'][:]:
@@ -105,10 +110,11 @@ def plot_base(data, itime, var_levels, oname):
 
 #Adjusting margins figure
     fig.subplots_adjust(left=0.05,right=0.95,top=0.97,bottom=0.03)
-    #ax=fig.subplot(1,1,1,
-    ax=fig.add_subplot(1,1,1,
+    ax=plt.subplot(1,1,1,
+    #ax=fig.add_subplot(1,1,1,
             projection=proj,
             )
+    ax.set_extent(ax_lim, proj)
 #load features
 #ax.add_feature(ocean,
 #        facecolor=feature.COLORS['water'],
@@ -128,26 +134,10 @@ def plot_base(data, itime, var_levels, oname):
         zorder=12,
         )
     #print('features:',dt.datetime.now()-t1, end=' ')
-#url = 'https://map1c.vis.earthdata.nasa.gov/wmts-geo/wmts.cgi'
-#layer = 'VIIRS_CityLights_2012'
-#ax.add_wmts(url, layer)
+    #url = 'https://map1c.vis.earthdata.nasa.gov/wmts-geo/wmts.cgi'
+    #layer = 'VIIRS_CityLights_2012'
+    #ax.add_wmts(url, layer)
 
-    #city names
-    #for i,record in enumerate(reader.records()):
-    #    name = record.attributes['name_es']
-    #    geometry = record.geometry
-    #    #if i==0:
-    #        #print(record.attributes.keys())
-    #    x,y = geometry.centroid.x, geometry.centroid.y
-    #    ax.text(x, y, name,
-    #            #fontsize=2,
-    #            zorder=17,
-    #            clip_on=True,
-    #            ha='center',
-    #            va='top',
-    #            transform=ccrs.PlateCarree(),
-    #            color='gray',
-    #            )
     #print('names:',dt.datetime.now()-t1, end=' ')
 
     #logo plot
@@ -160,8 +150,8 @@ def plot_base(data, itime, var_levels, oname):
     #print('logo:',dt.datetime.now()-t1, end=' ')
     #info text
     txt_box='\n'.join((
-            '>Distribución del sargazo + Temperatura ',
-            #' Corriente en superficie',
+            '>Distribución del sargazo + elevación +',
+            ' Corriente en superficie',
             '>Modelo: FVCOM',
             '>Grupo Interacción Océano-Atmósfera',
             )
@@ -172,28 +162,56 @@ def plot_base(data, itime, var_levels, oname):
     draw_info(ax,title,txt_box)
     #print('box::',dt.datetime.now()-t1, end=' ')
 #wind plot
+    #u=np.expand_dims(data['u'][itime],axis=0)
+    #v=np.expand_dims(data['v'][itime],axis=0)
+    #magn=np.expand_dims(data['magnitude'][itime],axis=0)
+    x,y,u,v=cvt.vector_scalar_to_grid(proj, proj, 25,
+            data['lonc'],
+            data['latc'],
+            data['u'][itime],
+            data['v'][itime],
+            )
+    
 #ind=np.arange(0,len(u),20)
-#ax.quiver(
-        #lonc,
-        #latc,
-        #u,
-        #v,
-        #scale=30,
-        ##transform=ccrs.PlateCarree(),
-        #regrid_shape=20,
-        #)
-#wplot=ax.streamplot(
-#        lonc,
-#        latc,
-#        u,
-#        v,
-#        #linewidth=1,
-#        density=2,
-#        color=magnitude,
-#        cmap=plt.cm.tab10,
-#        #levels=np.arange(0,2,0.2),
-#        zorder=5,
-#        )
+    ax.quiver(
+            x,y,u,v,
+            scale=2,
+            scale_units='inches',
+            pivot='middle',
+            color='blue',
+            zorder=25,
+            )
+    #ax.barbs(
+    #        x,y,u,v,
+    #        #sizes=dict(emptybarb=0.1, spacing=2.2, height=0.5),
+    #        #linewidth=0.95,
+    #        #length=10,
+    #        #pivot='middle',
+    #        #transform=ccrs.PlateCarree(),
+    #        zorder=25,
+    #        )
+    #wplot=ax.streamplot(
+    #    data['lonc'],
+    #    data['latc'],
+    #    u,v,
+    #    #linewidth=1,
+    #    #density=2,
+    #    color='red',
+    #    #cmap=plt.cm.tab10,
+    #    #levels=np.arange(0,2,0.2),
+    #    zorder=5,
+    #    )
+    #city names
+    for name in city:
+        ax.text(name[0], name[1], name[2],
+                #fontsize=2,
+                zorder=17,
+                #clip_on=True,
+                ha='center',
+                va='top',
+                transform=ccrs.PlateCarree(),
+                color='black',
+                )
     #city points plot
     ax.scatter(xp,
                yp,
@@ -205,7 +223,7 @@ def plot_base(data, itime, var_levels, oname):
                )
     #print('points:',dt.datetime.now()-t1, end=' ')
     #apply limits
-    plt.axis(ax_lim)
+    #plt.axis(ax_lim)
     ax_leg=ax.gridlines(
             draw_labels=True,
             linestyle='--',
@@ -256,7 +274,7 @@ def plot_base(data, itime, var_levels, oname):
             fraction=0.03,
             )
     cbar.ax.set_ylabel('Elevación de la superficie [m]')
-    #mat plot
+    ##mat plot
     ax.plot(
             data['par_lon'],
             data['par_lat'],
@@ -301,11 +319,9 @@ if __name__=='__main__':
     lev_a=np.arange(-1,0,0.1)
     lev_b=np.arange(-0.05,0.1,0.05)
     lev_c=np.arange(0.2,1,0.1)
-#zlevels=np.concatenate((lev_a,lev_b,lev_c))
     var_levels['zeta']=np.concatenate((lev_a,lev_b,lev_c))
 
 #temperature
-#tlevels=np.arange(23,30,0.5)
     var_levels['temp']=np.arange(23,30,0.5)
     t_ticks=np.arange(20,30,0.5)
 
@@ -325,10 +341,18 @@ if __name__=='__main__':
             )
     fname='files/ne_10m_populated_places.shp'
     reader=Reader(fname)
+    #city names
+    city=[]
+    for i,record in enumerate(reader.records()):
+        name = record.attributes['name_es']
+        geometry = record.geometry
+        x,y = geometry.centroid.x, geometry.centroid.y
+        if all([lon_min<x<lon_max, lat_min<y<lat_max]):
+            city.append([x, y, name])
 #city points
     points=[list(point.coords) for point in reader.geometries()]
-    xp=[point[0][0] for point in points]
-    yp=[point[0][1] for point in points]
+    xp = [ point[0][0] for point in points if all([lon_min<point[0][0]<lon_max, lat_min< point[0][1]<lat_max]) ]
+    yp = [ point[0][1] for point in points if all([lon_min<point[0][0]<lon_max, lat_min< point[0][1]<lat_max]) ]
     #features=[land,coastline,states,reader]
     
 #ocean= feature.ShapelyFeature(
@@ -339,6 +363,7 @@ if __name__=='__main__':
     stime=dt.datetime.now()
     #load netcdf data
     data=getdata(url)
+    print('size;',data['u'][1].shape, data['magnitude'][1].shape)
     with netCDF4.Dataset(url) as nc_data:
         if var == 'temp':
             #only 0 layer

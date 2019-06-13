@@ -13255,7 +13255,7 @@ a.anchor-link {
 <br></p>
 <p>
     <strong>Miguel Ángel Robles Roldán </strong><br>
-    Técnico Académico, Centro de Ciencias de la Atmósfera <br>
+    Técnico Académico, Grupo Interacción Océano-Atmósfera, Centro de Ciencias de la Atmósfera <br>
     <a href="mailto:miguel.robles@atmosfera.unam.mx"> miguel.robles@atmosfera.unam.mx</a><br>
     <a href="https://github.com/ma-robles"> github:https://github.com/ma-robles</a><br>
 </p>
@@ -13265,17 +13265,17 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Graficaci&#243;n-de-salidas-WRF">Graficaci&#243;n de salidas WRF<a class="anchor-link" href="#Graficaci&#243;n-de-salidas-WRF">&#182;</a></h2><h3 id="Extracci&#243;n-de-datos">Extracci&#243;n de datos<a class="anchor-link" href="#Extracci&#243;n-de-datos">&#182;</a></h3><ul>
-<li>Archivos de salida (netCDF)</li>
-<li>Post-procesamiento</li>
-</ul>
-<h3 id="Graficaci&#243;n">Graficaci&#243;n<a class="anchor-link" href="#Graficaci&#243;n">&#182;</a></h3><ul>
-<li>Graficación usando pyplot y cartopy</li>
-<li>Otras posibilidades:<ul>
-<li>Graficación de mallas no estructuradas</li>
-<li>Generación de contenido web</li>
-</ul>
-</li>
+<p><img src=img/wrf_logo.jpg width="15%" align="right" ><br></p>
+<h2 id="WRF-(Weather-Research-and-Forecasting)">WRF (Weather Research and Forecasting)<a class="anchor-link" href="#WRF-(Weather-Research-and-Forecasting)">&#182;</a></h2><blockquote><p>WRF es un modelo de predicción numérica del tiempo diseñado para la investigación y para aplicaciones operativas ...
+<br>
+<a href="http://grupo-ioa.atmosfera.unam.mx/pronosticos/index.php/meteorologia/inf-wrf">http://grupo-ioa.atmosfera.unam.mx/pronosticos/index.php/meteorologia/inf-wrf</a></p>
+</blockquote>
+<ul>
+<li>Contribuyen diversas instituciones a su desarrollo (NCAR, NOAA, NCEP, ...)</li>
+<li>Soporta cómputo en paralelo.</li>
+<li>Permite diversas escalas.</li>
+<li>...</li>
+<li><em>Como salida del modelo se generan archivos de tipo NetCDF</em></li>
 </ul>
 
 </div>
@@ -13284,13 +13284,8 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Extracci&#243;n-de-datos">Extracci&#243;n de datos<a class="anchor-link" href="#Extracci&#243;n-de-datos">&#182;</a></h2>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src=img/netcdf_logo.png width="15%" align="right" ><br></p>
+<p><img src=img/xarray.png width="15%" align="right" ><br></p>
 <h2 id="NetCDF-(Network-Common-Data-Form)">NetCDF (Network Common Data Form)<a class="anchor-link" href="#NetCDF-(Network-Common-Data-Form)">&#182;</a></h2><p><em>Es un conjunto de bibliotecas (en varios lenguajes) y formatos multiplataforma y autodescriptivos para crear, acceder y compartir datos de tipo arreglo.</em></p>
 <h3 id="Formatos-NetCDF">Formatos NetCDF<a class="anchor-link" href="#Formatos-NetCDF">&#182;</a></h3><ul>
 <li>CDF-1 (Formato clásico) - Primer formato, por defecto en todas las bibliotecas.</li>
@@ -13314,42 +13309,217 @@ a.anchor-link {
 <li><p>Algunos ejemplos:</p>
 </li>
 </ul>
-<p>float Q2(Time, south_north, west_east) ;</p>
+<blockquote><p>float Q2(Time, south_north, west_east) <br>
+       Q2:description = "QV at 2 M" <br>
+       Q2:units = "kg kg-1" <br></p>
+</blockquote>
 
-<pre><code>    Q2:description = "QV at 2 M" ;
-    Q2:units = "kg kg-1" ;
-</code></pre>
-<p>float T2(Time, south_north, west_east) ;</p>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>float T2(Time, south_north, west_east) <br>
+       T2:description = "TEMP at 2 M" <br>
+       T2:units = "K" <br></p>
+<p>float TH2(Time, south_north, west_east) <br>
+       TH2:description = "POT TEMP at 2 M" <br>
+       TH2:units = "K" <br></p>
+<p>float PSFC(Time, south_north, west_east) <br>
+       PSFC:description = "SFC PRESSURE" <br>
+       PSFC:units = "Pa" <br></p>
+<p>float U10(Time, south_north, west_east) <br>
+       U10:description = "U at 10 M" <br>
+       U10:units = "m s-1" <br></p>
+<p>float V10(Time, south_north, west_east) <br>
+       V10:description = "V at 10 M" <br>
+       V10:units = "m s-1" <br></p>
+</blockquote>
 
-<pre><code>    T2:description = "TEMP at 2 M" ;
-    T2:units = "K" ;
-</code></pre>
-<p>float TH2(Time, south_north, west_east) ;</p>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Post-procesamiento">Post-procesamiento<a class="anchor-link" href="#Post-procesamiento">&#182;</a></h2><p>*Procesamiento/manejo de datos posterior al realizado por el modelo (WRF)</p>
+<ul>
+<li>máximos/mínimos</li>
+<li>acumulados/promedios</li>
+<li>recortes</li>
+<li>graficación</li>
+</ul>
 
-<pre><code>    TH2:description = "POT TEMP at 2 M" ;
-    TH2:units = "K" ;
-</code></pre>
-<p>float PSFC(Time, south_north, west_east) ;</p>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#191;Para-qu&#233;-post-procesar?">&#191;Para qu&#233; post-procesar?<a class="anchor-link" href="#&#191;Para-qu&#233;-post-procesar?">&#182;</a></h2><ul>
+<li>Verificación y análisis.</li>
+<li>Divulgación.</li>
+<li>Presentación de datos en informes, artículos, tesis...</li>
+</ul>
 
-<pre><code>    PSFC:description = "SFC PRESSURE" ;
-    PSFC:units = "Pa" ;
-</code></pre>
-<p>float U10(Time, south_north, west_east) ;</p>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Herramientas-de-post-procesamiento-para-salidas-del-WRF">Herramientas de post-procesamiento para salidas del WRF<a class="anchor-link" href="#Herramientas-de-post-procesamiento-para-salidas-del-WRF">&#182;</a></h2><ul>
+<li>Paquetes y bibliotecas diseñados para leer archivos NetCDF</li>
+</ul>
 
-<pre><code>    U10:description = "U at 10 M" ;
-    U10:units = "m s-1" ;
-</code></pre>
-<p>float V10(Time, south_north, west_east) ;</p>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br><img src=img/wrf_ioa_scr.png width="95%" align="center" ><br></p>
+<p><a href="http://grupo-ioa.atmosfera.unam.mx/pronosticos/index.php/meteorologia/inf-wrf">http://grupo-ioa.atmosfera.unam.mx/pronosticos/index.php/meteorologia/inf-wrf</a></p>
 
-<pre><code>    V10:description = "V at 10 M" ;
-    V10:units = "m s-1" ;</code></pre>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Matlab</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>NCL</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Python :)!</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bibliotecas-en-Python">Bibliotecas en Python<a class="anchor-link" href="#Bibliotecas-en-Python">&#182;</a></h2><ul>
+<li>matplotlib</li>
+<li>cartopy</li>
+<li>datetime</li>
+<li>scipy</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Instalaci&#243;n">Instalaci&#243;n<a class="anchor-link" href="#Instalaci&#243;n">&#182;</a></h2><ul>
+<li>numpy -  conda install -c anaconda numpy </li>
+<li>netCDF4 - conda install -c anaconda netcdf4 </li>
+<li>cartopy - conda install -c conda-forge cartopy </li>
+<li>matplotlib - conda install -c conda-forge matplotlib </li>
+<li>scipy -  conda install -c anaconda scipy </li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Graficaci&#243;n-con-pyplot-y-cartopy">Graficaci&#243;n con pyplot y cartopy<a class="anchor-link" href="#Graficaci&#243;n-con-pyplot-y-cartopy">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Matplolib">Matplolib<a class="anchor-link" href="#Matplolib">&#182;</a></h3>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pyplot">Pyplot<a class="anchor-link" href="#Pyplot">&#182;</a></h3>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cartopy">Cartopy<a class="anchor-link" href="#Cartopy">&#182;</a></h3>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Extracci&#243;n-de-datos">Extracci&#243;n de datos<a class="anchor-link" href="#Extracci&#243;n-de-datos">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Graficaci&#243;n-usando-pyplot-y-cartopy">Graficaci&#243;n usando pyplot y cartopy<a class="anchor-link" href="#Graficaci&#243;n-usando-pyplot-y-cartopy">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Graficaci&#243;n-de-mallas-no-estructuradas">Graficaci&#243;n de mallas no estructuradas<a class="anchor-link" href="#Graficaci&#243;n-de-mallas-no-estructuradas">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Generaci&#243;n-de-contenido-web">Generaci&#243;n de contenido web<a class="anchor-link" href="#Generaci&#243;n-de-contenido-web">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Graficaci&#243;n-de-salidas-WRF">Graficaci&#243;n de salidas WRF<a class="anchor-link" href="#Graficaci&#243;n-de-salidas-WRF">&#182;</a></h2><h3 id="Extracci&#243;n-de-datos">Extracci&#243;n de datos<a class="anchor-link" href="#Extracci&#243;n-de-datos">&#182;</a></h3><ul>
+<li>Archivos de salida (netCDF)</li>
+<li>Post-procesamiento</li>
+</ul>
+<h3 id="Graficaci&#243;n">Graficaci&#243;n<a class="anchor-link" href="#Graficaci&#243;n">&#182;</a></h3><ul>
+<li>Graficación usando pyplot y cartopy</li>
+<li>Otras posibilidades:<ul>
+<li>Graficación de mallas no estructuradas</li>
+<li>Generación de contenido web</li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">netCDF4</span>
@@ -13359,30 +13529,7 @@ a.anchor-link {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-9588a3d4fb24&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> netCDF4
-
-<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;netCDF4&#39;</pre>
 </div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>

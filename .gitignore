@@ -1,6 +1,6 @@
+.*
 *.err
 *.out
-*png
 !logo*.png
 __*
 .*
